@@ -9,3 +9,4 @@ langchain-openai>=0.2.2
 tiktoken>=0.8.0
 faiss-cpu>=1.8.0.post1
 aiofiles>=23.2.1
+aiosqlite>=0.21.0

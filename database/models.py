@@ -21,10 +21,16 @@ async def get_user(user_id):
     conn = await get_db_connection()
     try:
         async with conn.cursor() as cursor:
-            await cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
+            # Явно указываем порядок полей
+            await cursor.execute('''
+                SELECT id, user_id, username, first_name, last_name, 
+                       country, interests, subject, onboarding_completed, time_added 
+                FROM users WHERE user_id = ?
+            ''', (user_id,))
             return await cursor.fetchone()
     finally:
         await conn.close()
+
 
 # Функции для работы с сообщениями
 async def add_message(user_id, message_text, response_text):
